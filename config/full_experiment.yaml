@@ -1,0 +1,65 @@
+global_settings:
+  seeds: [11, 22, 33, 44, 55]
+  device: "cuda:0"
+  output_dir: ".research/iteration1/"
+
+acclimate_hparams:
+  tau_search_space: [0.01, 0.03, 0.05, 0.07, 0.1]
+  k_search_space: [4, 8, 16]
+  kappa_max_nll_bound: 0.1
+  validation_setup:
+    dataset: "ImageNet-C"
+    corruption: "gaussian_noise" # A representative corruption for calibration
+    severity: 3 # Held-out validation shift
+
+experiment_1:
+  enabled: true
+  models:
+    - "nf_resnet50.ra2_in1k"
+    - "convnext_tiny.in12k_ft_in1k" 
+    - "repvgg_b1g4.rvgg_in1k"
+    - "vit_base_patch16_224.augreg2_in21k_ft_in1k"
+    - "bert-base-uncased"
+  datasets:
+    - "ImageNet-C"
+    - "ImageNet-V2"
+    - "ImageNet-A"
+    - "ImageNet-R"
+    - "CIFAR-C"
+    - "ImageNet-3DCC"
+    - "Amazon-Yelp"
+  methods:
+    - "Source"
+    - "BN-recompute"
+    - "Tent"
+    - "EATA"
+    - "CoTTA"
+    - "FARM"
+    - "SAFARI"
+    - "ACCLIMATE"
+  batch_sizes: [1, 2, 4]
+
+experiment_2:
+  enabled: true
+  model: "nf_resnet50.ra2_in1k"
+  dataset: "ImageNet-C"
+  ablations:
+    - "full"
+    - "-CSD"
+    - "-PRG"
+    - "-CBU"
+    - "-NPM"
+
+experiment_3:
+  enabled: true
+  datasets:
+    - "CCC"
+    - "Shifted-Objects-RT"
+  baselines:
+    - "Source"
+    - "SAFARI"
+    - "EATA"
+    - "CoTTA"
+    - "ACCLIMATE"
+  batch_size: 1
+  fps: 30
