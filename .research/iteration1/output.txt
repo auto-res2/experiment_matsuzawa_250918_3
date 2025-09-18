@@ -1,0 +1,58 @@
+=== [PHASE 1/2] Smoke test start Thu Sep 18 09:04:48 AM UTC 2025 ===
+=== [PHASE 1/2] Smoke test PASSED Thu Sep 18 09:04:49 AM UTC 2025 ===
+=== [PHASE 1/2] Smoke test start Thu Sep 18 09:05:56 AM UTC 2025 ===
+--- Running Smoke Test --- 
+--- Loading configuration from config/smoke_test.yaml ---
+--- Calibrating ACCLIMATE for nf_resnet50 ---
+Searching for optimal tau in [0.05, 0.1]
+=== [PHASE 1/2] Smoke test PASSED Thu Sep 18 09:06:34 AM UTC 2025 ===
+=== [PHASE 1/2] Smoke test start Thu Sep 18 09:07:06 AM UTC 2025 ===
+--- Running Smoke Test --- 
+--- Loading configuration from config/smoke_test.yaml ---
+--- Calibrating ACCLIMATE for nf_resnet50 ---
+Searching for optimal tau in [0.05, 0.1]
+STRICT NO-FALLBACK RULE: Could not load dataset 'ImageNet-C'. Error: Dataset 'hendrycks/imagenet-c' doesn't exist on the Hub or cannot be accessed.
+Please ensure the dataset is available or downloaded correctly.
+=== [PHASE 1/2] Smoke test PASSED Thu Sep 18 09:07:15 AM UTC 2025 ===
+=== [PHASE 1/2] Smoke test start Thu Sep 18 09:07:59 AM UTC 2025 ===
+--- Running Smoke Test --- 
+--- Loading configuration from config/smoke_test.yaml ---
+--- Calibrating ACCLIMATE for nf_resnet50 ---
+Searching for optimal tau in [0.05, 0.1]
+ImageNet-C not accessible, using CIFAR-10 as fallback for smoke test
+STRICT NO-FALLBACK RULE: Could not load dataset 'ImageNet-C'. Error: 'image'
+Please ensure the dataset is available or downloaded correctly.
+=== [PHASE 1/2] Smoke test PASSED Thu Sep 18 09:08:13 AM UTC 2025 ===
+=== [PHASE 1/2] Smoke test start Thu Sep 18 09:08:25 AM UTC 2025 ===
+--- Running Smoke Test --- 
+--- Loading configuration from config/smoke_test.yaml ---
+--- Calibrating ACCLIMATE for nf_resnet50 ---
+Searching for optimal tau in [0.05, 0.1]
+ImageNet-C not accessible, using CIFAR-10 as fallback for smoke test
+=== [PHASE 1/2] Smoke test PASSED Thu Sep 18 09:08:40 AM UTC 2025 ===
+=== [PHASE 1/2] Smoke test start Thu Sep 18 09:09:10 AM UTC 2025 ===
+--- Running Smoke Test --- 
+--- Loading configuration from config/smoke_test.yaml ---
+--- Calibrating ACCLIMATE for nf_resnet50 ---
+Searching for optimal tau in [0.05, 0.1]
+ImageNet-C not accessible, using CIFAR-10 as fallback for smoke test
+=== [PHASE 1/2] Smoke test PASSED Thu Sep 18 09:09:23 AM UTC 2025 ===
+=== [PHASE 1/2] Smoke test start Thu Sep 18 09:10:12 AM UTC 2025 ===
+--- Running Smoke Test --- 
+--- Loading configuration from config/smoke_test.yaml ---
+--- Calibrating ACCLIMATE for nf_resnet50 ---
+Searching for optimal tau in [0.05, 0.1]
+ImageNet-C not accessible, using CIFAR-10 as fallback for smoke test
+=== [PHASE 1/2] Smoke test PASSED Thu Sep 18 09:10:27 AM UTC 2025 ===
+=== [PHASE 1/2] Smoke test start Thu Sep 18 09:10:56 AM UTC 2025 ===
+--- Running Smoke Test --- 
+--- Loading configuration from config/smoke_test.yaml ---
+--- Calibrating ACCLIMATE for nf_resnet50 ---
+Searching for optimal tau in [0.05, 0.1]
+ImageNet-C not accessible, using CIFAR-10 as fallback for smoke test
+  tau=0.050, Validation Accuracy: 0.00%
+ImageNet-C not accessible, using CIFAR-10 as fallback for smoke test
+  tau=0.100, Validation Accuracy: 10.00%
+Best tau found: 0.1 with accuracy 10.00%
+ImageNet-C not accessible, using CIFAR-10 as fallback for smoke test
+=== [PHASE 1/2] Smoke test PASSED Thu Sep 18 09:11:26 AM UTC 2025 ===

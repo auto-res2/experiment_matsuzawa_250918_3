@@ -39,7 +39,11 @@ def calibrate_acclimate(model_name, config, device):
         correct = 0
         total = 0
         with torch.no_grad():
-            for images, labels in tqdm(val_loader, desc=f"Calibrating tau={tau}", leave=False):
+            for batch in tqdm(val_loader, desc=f"Calibrating tau={tau}", leave=False):
+                if isinstance(batch, dict):
+                    images, labels = batch['image'], batch['label']
+                else:
+                    images, labels = batch
                 images, labels = images.to(device), labels.to(device)
                 outputs = model(images)
                 _, predicted = torch.max(outputs.data, 1)
@@ -69,7 +73,11 @@ def calibrate_acclimate(model_name, config, device):
     delta_nlls = []
     kappas = []
     with torch.no_grad():
-        for images, labels in tqdm(val_loader, desc=f"Calibrating kappa_max with tau={best_tau}", leave=False):
+        for batch in tqdm(val_loader, desc=f"Calibrating kappa_max with tau={best_tau}", leave=False):
+            if isinstance(batch, dict):
+                images, labels = batch['image'], batch['label']
+            else:
+                images, labels = batch
             images, labels = images.to(device), labels.to(device)
             
             # NLL before adaptation

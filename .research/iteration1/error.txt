@@ -1,0 +1,182 @@
+warning: No `requires-python` value found in the workspace. Defaulting to `>=3.11`.
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/main.py", line 2, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/main.py", line 94, in <module>
+    main()
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/main.py", line 60, in main
+    params = calibrate_acclimate(model_name, config, device)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/train.py", line 35, in calibrate_acclimate
+    model.eval()
+    ^^^^^^^^^^
+AttributeError: 'ACCLIMATE' object has no attribute 'eval'
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'hendrycks/imagenet-c' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Calibrating tau=0.05: 0it [00:00, ?it/s]                                        Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/main.py", line 94, in <module>
+    main()
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/main.py", line 60, in main
+    params = calibrate_acclimate(model_name, config, device)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/train.py", line 42, in calibrate_acclimate
+    for images, labels in tqdm(val_loader, desc=f"Calibrating tau={tau}", leave=False):
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/tqdm/std.py", line 1181, in __iter__
+    for obj in iterable:
+TypeError: 'NoneType' object is not iterable
+Map:   0%|          | 0/100 [00:00<?, ? examples/s]Map:   0%|          | 0/100 [00:00<?, ? examples/s]
+Calibrating tau=0.05: 0it [00:00, ?it/s]                                        Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/main.py", line 94, in <module>
+    main()
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/main.py", line 60, in main
+    params = calibrate_acclimate(model_name, config, device)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/train.py", line 42, in calibrate_acclimate
+    for images, labels in tqdm(val_loader, desc=f"Calibrating tau={tau}", leave=False):
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/tqdm/std.py", line 1181, in __iter__
+    for obj in iterable:
+TypeError: 'NoneType' object is not iterable
+Map:   0%|          | 0/100 [00:00<?, ? examples/s]Map:  21%|██        | 21/100 [00:00<00:00, 156.41 examples/s]Map:  63%|██████▎   | 63/100 [00:00<00:00, 288.32 examples/s]Map: 100%|██████████| 100/100 [00:01<00:00, 49.84 examples/s]Map: 100%|██████████| 100/100 [00:01<00:00, 60.44 examples/s]
+Calibrating tau=0.05:   0%|          | 0/100 [00:00<?, ?it/s]                                                             Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/main.py", line 94, in <module>
+    main()
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/main.py", line 60, in main
+    params = calibrate_acclimate(model_name, config, device)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/train.py", line 42, in calibrate_acclimate
+    for images, labels in tqdm(val_loader, desc=f"Calibrating tau={tau}", leave=False):
+        ^^^^^^^^^^^^^^
+ValueError: too many values to unpack (expected 2)
+Calibrating tau=0.05:   0%|          | 0/100 [00:00<?, ?it/s]                                                             Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/main.py", line 94, in <module>
+    main()
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/main.py", line 60, in main
+    params = calibrate_acclimate(model_name, config, device)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/train.py", line 48, in calibrate_acclimate
+    outputs = model(images)
+              ^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/evaluate.py", line 269, in __call__
+    return self.model(x)
+           ^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/timm/models/nfnet.py", line 577, in forward
+    x = self.forward_features(x)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/timm/models/nfnet.py", line 547, in forward_features
+    x = self.stem(x)
+        ^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/torch/nn/modules/container.py", line 244, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/torch/nn/modules/container.py", line 244, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/evaluate.py", line 194, in forward
+    sk = (flat_x @ self.proj).pow(2).mean(0)
+          ~~~~~~~^~~~~~~~~~~
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (65536x3 and 64x8)
+Calibrating tau=0.05:   0%|          | 0/100 [00:00<?, ?it/s]                                                             Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/main.py", line 94, in <module>
+    main()
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/main.py", line 60, in main
+    params = calibrate_acclimate(model_name, config, device)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/train.py", line 48, in calibrate_acclimate
+    outputs = model(images)
+              ^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/evaluate.py", line 269, in __call__
+    return self.model(x)
+           ^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/timm/models/nfnet.py", line 578, in forward
+    x = self.forward_head(x)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/timm/models/nfnet.py", line 566, in forward_head
+    return self.head(x, pre_logits=pre_logits) if pre_logits else self.head(x)
+                                                                  ^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/timm/layers/classifier.py", line 132, in forward
+    x = self.fc(x)
+        ^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/torch/nn/modules/container.py", line 244, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/evaluate.py", line 195, in forward
+    csd = torch.cat([mu_d, sig_d, sk], dim=0)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: zero-dimensional tensor (at position 0) cannot be concatenated
+Calibrating tau=0.05:   0%|          | 0/100 [00:00<?, ?it/s]Calibrating tau=0.05:   1%|          | 1/100 [00:00<00:59,  1.67it/s]Calibrating tau=0.05:   3%|▎         | 3/100 [00:00<00:18,  5.18it/s]Calibrating tau=0.05:   5%|▌         | 5/100 [00:00<00:11,  8.35it/s]Calibrating tau=0.05:   7%|▋         | 7/100 [00:00<00:08, 11.08it/s]Calibrating tau=0.05:  10%|█         | 10/100 [00:01<00:06, 14.02it/s]Calibrating tau=0.05:  13%|█▎        | 13/100 [00:01<00:05, 15.99it/s]Calibrating tau=0.05:  16%|█▌        | 16/100 [00:01<00:04, 17.30it/s]Calibrating tau=0.05:  18%|█▊        | 18/100 [00:01<00:04, 17.86it/s]Calibrating tau=0.05:  20%|██        | 20/100 [00:01<00:04, 17.77it/s]Calibrating tau=0.05:  23%|██▎       | 23/100 [00:01<00:04, 18.54it/s]Calibrating tau=0.05:  26%|██▌       | 26/100 [00:01<00:03, 19.07it/s]Calibrating tau=0.05:  28%|██▊       | 28/100 [00:01<00:03, 19.00it/s]Calibrating tau=0.05:  30%|███       | 30/100 [00:02<00:03, 18.91it/s]Calibrating tau=0.05:  33%|███▎      | 33/100 [00:02<00:03, 19.53it/s]Calibrating tau=0.05:  36%|███▌      | 36/100 [00:02<00:03, 19.79it/s]Calibrating tau=0.05:  39%|███▉      | 39/100 [00:02<00:03, 19.95it/s]Calibrating tau=0.05:  42%|████▏     | 42/100 [00:02<00:02, 20.07it/s]Calibrating tau=0.05:  45%|████▌     | 45/100 [00:02<00:02, 20.14it/s]Calibrating tau=0.05:  48%|████▊     | 48/100 [00:02<00:02, 20.16it/s]Calibrating tau=0.05:  51%|█████     | 51/100 [00:03<00:02, 20.00it/s]Calibrating tau=0.05:  54%|█████▍    | 54/100 [00:03<00:02, 20.07it/s]Calibrating tau=0.05:  57%|█████▋    | 57/100 [00:03<00:02, 20.16it/s]Calibrating tau=0.05:  60%|██████    | 60/100 [00:03<00:02, 19.92it/s]Calibrating tau=0.05:  63%|██████▎   | 63/100 [00:03<00:01, 20.63it/s]Calibrating tau=0.05:  66%|██████▌   | 66/100 [00:03<00:01, 21.97it/s]Calibrating tau=0.05:  69%|██████▉   | 69/100 [00:03<00:01, 23.00it/s]Calibrating tau=0.05:  72%|███████▏  | 72/100 [00:04<00:01, 23.81it/s]Calibrating tau=0.05:  75%|███████▌  | 75/100 [00:04<00:01, 24.34it/s]Calibrating tau=0.05:  78%|███████▊  | 78/100 [00:04<00:00, 24.67it/s]Calibrating tau=0.05:  81%|████████  | 81/100 [00:04<00:00, 25.05it/s]Calibrating tau=0.05:  84%|████████▍ | 84/100 [00:04<00:00, 25.32it/s]Calibrating tau=0.05:  87%|████████▋ | 87/100 [00:04<00:00, 25.53it/s]Calibrating tau=0.05:  90%|█████████ | 90/100 [00:04<00:00, 25.46it/s]Calibrating tau=0.05:  93%|█████████▎| 93/100 [00:04<00:00, 25.43it/s]Calibrating tau=0.05:  96%|█████████▌| 96/100 [00:04<00:00, 25.67it/s]Calibrating tau=0.05:  99%|█████████▉| 99/100 [00:05<00:00, 25.82it/s]                                                                      Calibrating tau=0.1:   0%|          | 0/100 [00:00<?, ?it/s]Calibrating tau=0.1:   2%|▏         | 2/100 [00:00<00:05, 17.57it/s]Calibrating tau=0.1:   5%|▌         | 5/100 [00:00<00:04, 19.25it/s]Calibrating tau=0.1:   8%|▊         | 8/100 [00:00<00:04, 19.82it/s]Calibrating tau=0.1:  11%|█         | 11/100 [00:00<00:04, 20.11it/s]Calibrating tau=0.1:  14%|█▍        | 14/100 [00:00<00:04, 20.32it/s]Calibrating tau=0.1:  17%|█▋        | 17/100 [00:00<00:04, 20.44it/s]Calibrating tau=0.1:  20%|██        | 20/100 [00:00<00:03, 20.48it/s]Calibrating tau=0.1:  23%|██▎       | 23/100 [00:01<00:03, 20.29it/s]Calibrating tau=0.1:  26%|██▌       | 26/100 [00:01<00:03, 20.33it/s]Calibrating tau=0.1:  29%|██▉       | 29/100 [00:01<00:03, 20.41it/s]Calibrating tau=0.1:  32%|███▏      | 32/100 [00:01<00:03, 20.45it/s]Calibrating tau=0.1:  35%|███▌      | 35/100 [00:01<00:03, 20.48it/s]Calibrating tau=0.1:  38%|███▊      | 38/100 [00:01<00:03, 20.44it/s]Calibrating tau=0.1:  41%|████      | 41/100 [00:02<00:02, 20.41it/s]Calibrating tau=0.1:  44%|████▍     | 44/100 [00:02<00:02, 20.40it/s]Calibrating tau=0.1:  47%|████▋     | 47/100 [00:02<00:02, 20.43it/s]Calibrating tau=0.1:  50%|█████     | 50/100 [00:02<00:02, 20.43it/s]Calibrating tau=0.1:  53%|█████▎    | 53/100 [00:02<00:02, 20.47it/s]Calibrating tau=0.1:  56%|█████▌    | 56/100 [00:02<00:02, 20.48it/s]Calibrating tau=0.1:  59%|█████▉    | 59/100 [00:02<00:01, 20.51it/s]Calibrating tau=0.1:  62%|██████▏   | 62/100 [00:03<00:01, 20.53it/s]Calibrating tau=0.1:  65%|██████▌   | 65/100 [00:03<00:01, 20.60it/s]Calibrating tau=0.1:  68%|██████▊   | 68/100 [00:03<00:01, 20.69it/s]Calibrating tau=0.1:  71%|███████   | 71/100 [00:03<00:01, 20.71it/s]Calibrating tau=0.1:  74%|███████▍  | 74/100 [00:03<00:01, 20.69it/s]Calibrating tau=0.1:  77%|███████▋  | 77/100 [00:03<00:01, 20.58it/s]Calibrating tau=0.1:  80%|████████  | 80/100 [00:03<00:00, 20.74it/s]Calibrating tau=0.1:  83%|████████▎ | 83/100 [00:04<00:00, 20.77it/s]Calibrating tau=0.1:  86%|████████▌ | 86/100 [00:04<00:00, 20.72it/s]Calibrating tau=0.1:  89%|████████▉ | 89/100 [00:04<00:00, 20.80it/s]Calibrating tau=0.1:  92%|█████████▏| 92/100 [00:04<00:00, 20.81it/s]Calibrating tau=0.1:  95%|█████████▌| 95/100 [00:04<00:00, 20.42it/s]Calibrating tau=0.1:  98%|█████████▊| 98/100 [00:04<00:00, 19.98it/s]                                                                     Calibrating kappa_max with tau=0.1:   0%|          | 0/100 [00:00<?, ?it/s]                                                                           Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/main.py", line 94, in <module>
+    main()
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/main.py", line 60, in main
+    params = calibrate_acclimate(model_name, config, device)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/pt80-1-a-28/_work/experiment_matsuzawa_250918_3/experiment_matsuzawa_250918_3/src/train.py", line 94, in calibrate_acclimate
+    avg_kappa = torch.mean(torch.stack([m.kappa for m in model.modules() if hasattr(m, 'is_npm_layer')])).item()
+                                                         ^^^^^^^^^^^^^
+AttributeError: 'ACCLIMATE' object has no attribute 'modules'

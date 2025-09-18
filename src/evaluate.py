@@ -42,6 +42,16 @@ class TTAMethod:
     def __call__(self, x):
         return self.model(x)
 
+    def eval(self):
+        """Delegate eval() to the underlying model"""
+        self.model.eval()
+        return self
+
+    def train(self):
+        """Delegate train() to the underlying model"""
+        self.model.train()
+        return self
+
     def reset(self):
         pass # Reset state for new stream
 
@@ -163,25 +173,29 @@ class NPMLayer(nn.Module):
         if self.ablation == '-NPM': # In -NPM, this layer is a no-op
             return x
 
-        B, C, *spatial_dims = x.shape
-        is_2d = len(spatial_dims) == 2
-        
-        if is_2d:
-            mu = x.mean(dim=(-1, -2))
-            sig = x.std(dim=(-1, -2))
+        # Handle different input shapes
+        if len(x.shape) == 4:  # Conv layer: (B, C, H, W)
+            B, C = x.shape[:2]
+            mu = x.mean(dim=(-1, -2))  # (B, C)
+            sig = x.std(dim=(-1, -2))   # (B, C)
+            is_2d = True
+        elif len(x.shape) == 2:  # FC layer: (B, C)
+            B, C = x.shape
+            mu = x  # For 1D, mean across batch later
+            sig = torch.zeros_like(x)  # No spatial variation for FC
+            is_2d = False
         else:
-            mu = x.mean(dim=-1)
-            sig = x.std(dim=-1)
+            raise ValueError(f"Unsupported input shape: {x.shape}")
         
-        mu_d = mu.mean(0)
-        sig_d = sig.mean(0)
+        mu_d = mu.mean(0)  # (C,)
+        sig_d = sig.mean(0)  # (C,)
         
         if self.ablation != '-CSD' and self.k > 0:
             if is_2d:
                 flat_x = x.permute(0, 2, 3, 1).reshape(-1, C)
             else:
-                flat_x = x.reshape(-1, C)
-            sk = (flat_x @ self.proj).pow(2).mean(0)
+                flat_x = x  # Already flat for FC
+            sk = (flat_x @ self.proj).pow(2).mean(0)  # (k,)
             csd = torch.cat([mu_d, sig_d, sk], dim=0)
         else:
             csd = torch.cat([mu_d, sig_d], dim=0)
@@ -196,7 +210,8 @@ class NPMLayer(nn.Module):
             gamma = gamma[None, :, None, None]
             beta = beta[None, :, None, None]
         else:
-            gamma = gamma[None, :, None]
+            gamma = gamma[None, :]
+            beta = beta[None, :]
 
         return gamma * x + beta
 
@@ -294,7 +309,8 @@ def add_adaptation_mechanism(source_model, method_config, device):
 
     for name, module in model.named_children():
         if isinstance(module, (nn.Conv2d, nn.Linear)):
-            channels = module.out_channels if isinstance(module, nn.Conv2d) else module.out_features
+            # NPM layer receives input to this module, so use input dimensions
+            channels = module.in_channels if isinstance(module, nn.Conv2d) else module.in_features
             npm_layer = NPMLayer(channels, k, tau, ablation)
             new_module = nn.Sequential(npm_layer, module)
             setattr(model, name, new_module)
@@ -307,7 +323,8 @@ def add_adaptation_mechanism(source_model, method_config, device):
 def recursive_add_npm(parent_module, k, tau, ablation):
     for name, module in parent_module.named_children():
         if isinstance(module, (nn.Conv2d, nn.Linear)):
-            channels = module.out_channels if isinstance(module, nn.Conv2d) else module.out_features
+            # NPM layer receives input to this module, so use input dimensions
+            channels = module.in_channels if isinstance(module, nn.Conv2d) else module.in_features
             npm_layer = NPMLayer(channels, k, tau, ablation)
             new_module = nn.Sequential(npm_layer, module)
             setattr(parent_module, name, new_module)
