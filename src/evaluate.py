@@ -30,7 +30,11 @@ def setup_model(model_name, config, device):
         )
         # Optional RMSNorm swap (omitted for brevity)
     else:
-        model = timm.create_model(model_name, pretrained=True)
+        # For synthetic dataset, use fewer classes
+        if config.get("dataset") == "SYNTHETIC":
+            model = timm.create_model(model_name, pretrained=True, num_classes=10)
+        else:
+            model = timm.create_model(model_name, pretrained=True)
     return model.to(device)
 
 # --- TTA Method Implementations ---
@@ -153,6 +157,12 @@ class NPMLayer(nn.Module):
         mu = x.mean(dim=(-1, -2)) if is_2d else x.mean(dim=-1)
         sig = x.std(dim=(-1, -2)) if is_2d else x.std(dim=-1)
         mu_d, sig_d = mu.mean(0), sig.mean(0)
+        
+        # Ensure mu_d and sig_d have the right shape for channel-wise operations
+        if mu_d.dim() == 0:
+            mu_d = mu_d.expand(C)
+        if sig_d.dim() == 0:
+            sig_d = sig_d.expand(C)
 
         if self.ablation != "-CSD" and self.k > 0:
             flat = (
@@ -187,6 +197,181 @@ def recursive_add_npm(parent_module, k, tau, ablation):
         elif len(list(module.children())) > 0:
             recursive_add_npm(module, k, tau, ablation)
 
-# The remainder of evaluate.py (run_* functions) now uses _unpack_batch
-# wherever it loads batches from a DataLoader. To save space these
-# trivial replacements are omitted.
+class ACCLIMATE(TTAMethod):
+    def __init__(self, model, config, device):
+        super().__init__(model, config, device)
+        hparams = config.get("hparams", {})
+        tau = hparams.get("tau", 1.0)
+        k = hparams.get("k", 0)
+        kappa_max = hparams.get("kappa_max", 999.0)
+        ablation = config.get("ablation", "full")
+        
+        # Add NPM layers to the model
+        recursive_add_npm(self.model, k, tau, ablation)
+        
+        # Set kappa_max for all NPM layers
+        for m in self.model.modules():
+            if hasattr(m, "is_npm_layer"):
+                m.kappa_max = kappa_max
+
+def add_adaptation_mechanism(model, tta_config, device):
+    """Factory function to wrap models with TTA mechanisms"""
+    method = tta_config["method"]
+    
+    if method == "Source":
+        return Source(model, tta_config, device)
+    elif method == "BN-Recompute":
+        return BNRecompute(model, tta_config, device)
+    elif method == "Tent":
+        return Tent(model, tta_config, device)
+    elif method == "ACCLIMATE":
+        return ACCLIMATE(model, tta_config, device)
+    else:
+        raise ValueError(f"Unknown TTA method: {method}")
+
+def evaluate_model(model, dataloader, device):
+    """Evaluate model accuracy on a dataloader"""
+    model.eval()
+    correct = 0
+    total = 0
+    
+    with torch.no_grad():
+        for batch in dataloader:
+            images, labels = _unpack_batch(batch)
+            images, labels = images.to(device), labels.to(device)
+            outputs = model(images)
+            _, predicted = torch.max(outputs.data, 1)
+            total += labels.size(0)
+            correct += (predicted == labels).sum().item()
+    
+    return 100.0 * correct / total
+
+def run_benchmark_experiment(config, calibrated_params):
+    """Run the benchmark experiment"""
+    print("Running benchmark experiment...")
+    
+    exp_config = config["experiment_1"]
+    device = torch.device(config['global_settings']['device'])
+    results = {}
+    
+    for model_name in exp_config.get("models", []):
+        model_results = {}
+        base_model = setup_model(model_name, exp_config, device)
+        
+        # Test each method
+        methods = exp_config.get("methods", []) + exp_config.get("baselines", [])
+        for method in methods:
+            print(f"Testing {method} with {model_name}")
+            
+            if method == "ACCLIMATE" and model_name in calibrated_params:
+                tta_config = {
+                    "method": method,
+                    "hparams": calibrated_params[model_name],
+                    "ablation": "full"
+                }
+            else:
+                tta_config = {"method": method}
+            
+            model_wrapper = add_adaptation_mechanism(copy.deepcopy(base_model), tta_config, device)
+            
+            # Create dataloader
+            test_config = exp_config.copy()
+            test_config["model"] = model_name
+            test_config["batch_size"] = exp_config.get("batch_sizes", [32])[0]
+            
+            test_loader = get_dataloader(test_config, "test")
+            if test_loader is None:
+                print(f"Warning: Could not create test loader for {model_name}")
+                continue
+                
+            accuracy = evaluate_model(model_wrapper, test_loader, device)
+            model_results[method] = accuracy
+            print(f"  {method}: {accuracy:.2f}%")
+        
+        results[model_name] = model_results
+    
+    return results
+
+def run_ablation_experiment(config, calibrated_params):
+    """Run the ablation experiment"""
+    print("Running ablation experiment...")
+    
+    exp_config = config["experiment_2"]
+    device = torch.device(config['global_settings']['device'])
+    results = {}
+    
+    for model_name in exp_config.get("models", []):
+        if model_name not in calibrated_params:
+            print(f"Skipping {model_name} - no calibrated parameters")
+            continue
+            
+        model_results = {}
+        base_model = setup_model(model_name, exp_config, device)
+        
+        # Test different ablations
+        ablations = exp_config.get("ablations", ["full", "-NPM", "-CSD"])
+        for ablation in ablations:
+            print(f"Testing ablation {ablation} with {model_name}")
+            
+            tta_config = {
+                "method": "ACCLIMATE",
+                "hparams": calibrated_params[model_name],
+                "ablation": ablation
+            }
+            
+            model_wrapper = add_adaptation_mechanism(copy.deepcopy(base_model), tta_config, device)
+            
+            # Create dataloader
+            test_config = exp_config.copy()
+            test_config["model"] = model_name
+            test_config["batch_size"] = exp_config.get("batch_size", 32)
+            
+            test_loader = get_dataloader(test_config, "test")
+            if test_loader is None:
+                continue
+                
+            accuracy = evaluate_model(model_wrapper, test_loader, device)
+            model_results[ablation] = accuracy
+            print(f"  {ablation}: {accuracy:.2f}%")
+        
+        results[model_name] = model_results
+    
+    return results
+
+def run_streaming_experiment(config, calibrated_params):
+    """Run the streaming experiment"""
+    print("Running streaming experiment...")
+    
+    exp_config = config["experiment_3"]
+    device = torch.device(config['global_settings']['device'])
+    results = {}
+    
+    for model_name in exp_config.get("models", []):
+        if model_name not in calibrated_params:
+            print(f"Skipping {model_name} - no calibrated parameters")
+            continue
+            
+        print(f"Testing streaming with {model_name}")
+        
+        tta_config = {
+            "method": "ACCLIMATE",
+            "hparams": calibrated_params[model_name],
+            "ablation": "full"
+        }
+        
+        model_wrapper = add_adaptation_mechanism(setup_model(model_name, exp_config, device), tta_config, device)
+        
+        # Create dataloader
+        test_config = exp_config.copy()
+        test_config["model"] = model_name
+        test_config["batch_size"] = exp_config.get("batch_size", 32)
+        
+        test_loader = get_dataloader(test_config, "test")
+        if test_loader is None:
+            continue
+            
+        accuracy = evaluate_model(model_wrapper, test_loader, device)
+        results[model_name] = accuracy
+        print(f"  Streaming accuracy: {accuracy:.2f}%")
+    
+    return results

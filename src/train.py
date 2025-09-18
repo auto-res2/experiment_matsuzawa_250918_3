@@ -17,6 +17,9 @@ def _unpack_batch(batch):
 
 
 def calculate_nll(logits, labels):
+    # Ensure labels are the right shape for CrossEntropyLoss
+    if labels.dim() > 1:
+        labels = labels.squeeze()
     return nn.CrossEntropyLoss()(logits, labels)
 
 

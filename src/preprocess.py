@@ -107,7 +107,23 @@ def get_dataloader(config, split):
             ds = ds.map(lambda x: {"image": cifar_t(x["image"]), "label": x["label"]})
             ds.set_format("torch")
             return DataLoader(ds, batch_size=batch_size, shuffle=True)
-        # (other datasets unchanged, just remove trust_remote_code arg)
+        # Synthetic dataset for testing
+        elif dataset_name == "SYNTHETIC":
+            class SyntheticDataset(Dataset):
+                def __init__(self, size=100):
+                    self.size = size
+                    
+                def __len__(self):
+                    return self.size
+                    
+                def __getitem__(self, idx):
+                    # Create random 3x224x224 images and random labels
+                    image = torch.randn(3, 224, 224)
+                    label = torch.randint(0, 10, (1,)).item()
+                    return {"image": image, "label": label}
+            
+            dataset = SyntheticDataset(size=50)  # Small dataset for smoke test
+            return DataLoader(dataset, batch_size=batch_size, shuffle=True)
         else:
             raise ValueError(f"Unknown image dataset: {dataset_name}")
     except Exception as e:

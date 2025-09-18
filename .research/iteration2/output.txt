@@ -1,0 +1,44 @@
+=== [PHASE 1/2] Smoke test start Thu Sep 18 09:18:35 AM UTC 2025 ===
+=== [PHASE 1/2] Smoke test PASSED Thu Sep 18 09:18:35 AM UTC 2025 ===
+=== [PHASE 1/2] Smoke test start Thu Sep 18 09:19:55 AM UTC 2025 ===
+=== [PHASE 1/2] Smoke test PASSED Thu Sep 18 09:20:19 AM UTC 2025 ===
+=== [PHASE 1/2] Smoke test start Thu Sep 18 09:21:36 AM UTC 2025 ===
+--- Running Smoke Test --- 
+--- Loading configuration from config/smoke_test.yaml ---
+--- Calibrating ACCLIMATE for nf_resnet50 ---
+Searching for optimal tau in [0.05, 0.1]
+=== [PHASE 1/2] Smoke test start Thu Sep 18 09:24:09 AM UTC 2025 ===
+--- Running Smoke Test --- 
+--- Loading configuration from config/smoke_test.yaml ---
+--- Calibrating ACCLIMATE for resnet18 ---
+Searching for optimal tau in [0.1]
+STRICT NO-FALLBACK RULE: Could not load dataset 'CIFAR-C'. Error: Dataset scripts are no longer supported, but found cifar10-c.py
+=== [PHASE 1/2] Smoke test PASSED Thu Sep 18 09:24:20 AM UTC 2025 ===
+=== [PHASE 1/2] Smoke test start Thu Sep 18 09:24:41 AM UTC 2025 ===
+--- Running Smoke Test --- 
+--- Loading configuration from config/smoke_test.yaml ---
+--- Calibrating ACCLIMATE for resnet18 ---
+Searching for optimal tau in [0.1]
+=== [PHASE 1/2] Smoke test PASSED Thu Sep 18 09:24:50 AM UTC 2025 ===
+=== [PHASE 1/2] Smoke test start Thu Sep 18 09:25:02 AM UTC 2025 ===
+--- Running Smoke Test --- 
+--- Loading configuration from config/smoke_test.yaml ---
+--- Calibrating ACCLIMATE for resnet18 ---
+Searching for optimal tau in [0.1]
+=== [PHASE 1/2] Smoke test PASSED Thu Sep 18 09:25:09 AM UTC 2025 ===
+=== [PHASE 1/2] Smoke test start Thu Sep 18 09:25:21 AM UTC 2025 ===
+--- Running Smoke Test --- 
+--- Loading configuration from config/smoke_test.yaml ---
+--- Calibrating ACCLIMATE for resnet18 ---
+Searching for optimal tau in [0.1]
+  tau=0.100, Validation Accuracy: 10000.00%
+Best tau found: 0.1 with accuracy 10000.00%
+=== [PHASE 1/2] Smoke test PASSED Thu Sep 18 09:25:30 AM UTC 2025 ===
+=== [PHASE 1/2] Smoke test start Thu Sep 18 09:25:42 AM UTC 2025 ===
+--- Running Smoke Test --- 
+--- Loading configuration from config/smoke_test.yaml ---
+--- Calibrating ACCLIMATE for resnet18 ---
+Searching for optimal tau in [0.1]
+  tau=0.100, Validation Accuracy: 100.00%
+Best tau found: 0.1 with accuracy 100.00%
+=== [PHASE 1/2] Smoke test PASSED Thu Sep 18 09:25:52 AM UTC 2025 ===
