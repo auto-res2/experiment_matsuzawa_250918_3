@@ -1,0 +1,55 @@
+name: ChkTeX
+
+on:
+  workflow_dispatch:
+    inputs:
+      subdir:
+        description: 'Subdirectory under .research/latex/ (e.g., iclr2025)'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  run-chktex:
+    runs-on: ubuntu-latest
+
+    env:
+      SUBDIR: ${{ github.event.inputs.subdir }}
+      LATEX_DIR: .research/latex/${{ github.event.inputs.subdir }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install chktex
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chktex
+
+      - name: Run chktex and save log
+        id: chktex
+        run: |
+          cd "$LATEX_DIR"
+
+          TEXFILE="paper.tex"
+          LOGFILE="chktex.log"
+          : > "$LOGFILE"
+
+          if [ ! -f "$TEXFILE" ]; then
+            echo "Error: $TEXFILE not found in $LATEX_DIR"
+            exit 1
+          fi
+
+          chktex "$TEXFILE" | tee "$LOGFILE" || true
+
+
+      - name: Commit and push chktex log
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -f "${LATEX_DIR}/chktex.log" || true
+          git commit -m "Add chktex log for ${SUBDIR}" || echo "No changes to commit"
+          git push origin "${{ github.ref_name }}"
